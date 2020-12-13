@@ -58,3 +58,19 @@ class CommentForm(FlaskForm):
     comment = TextAreaField('Comment',validators=[Length(min=1)])
 
     submit = SubmitField('Add Comment')
+
+class regextitleadd(FlaskForm):
+    class Meta:
+        csrf = False
+
+    Titleadd = StringField('title', validators=[DataRequired(), Regexp('^[ A-Za-z0-9]*$')])
+    Noteadd = StringField('note', validators=[Length(1, 1000)])
+    submit = SubmitField('Add Note')
+
+class regextitleedit(FlaskForm):
+    class Meta:
+        csrf = False
+
+    TitleEdit = StringField('title', validators=[DataRequired(), Regexp('^[ A-Za-z0-9]*$')])
+    NoteEdit = StringField('note', validators=[Length(1, 1000)])
+    submit = SubmitField('Update Note')

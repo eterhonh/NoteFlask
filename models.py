@@ -16,6 +16,7 @@ class Note(db.Model):
         self.date = date
         self.user_id = user_id
 
+
 class User(db.Model):
     id = db.Column("id", db.Integer, primary_key=True)
     first_name = db.Column("first_name", db.String(100))
@@ -33,6 +34,7 @@ class User(db.Model):
         self.password = password
         self.registered_on = datetime.date.today()
 
+
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, nullable=False)
@@ -46,3 +48,13 @@ class Comment(db.Model):
         self.note_id = note_id
         self.user_id = user_id
 
+class Todo(db.Model):
+    id = db.Column("id", db.Integer, primary_key=True)
+    text = db.Column("text", db.String(200))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    complete = db.Column(db.Boolean)
+
+    def __init__(self, text, user_id, complete):
+        self.text = text
+        self.user_id = user_id
+        self.complete = complete

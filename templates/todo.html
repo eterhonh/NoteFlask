@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@300&display=swap:400" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="todo.css" rel="stylesheet" type="text/css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Notes App">
+        <title>ToDO List</title>
+    </head>
+    <body>
+           <nav>
+		<nav>
+			<a href = "/index"> Home</a> ||
+			<a href = "/notes"> My Notes</a> ||
+			<a href = "/notes/new"> Add Note</a> ||
+			<a href="{{ url_for('logout') }}">Logout</a>
+			<a href="/todo">ToDo Tasks</a>
+		</nav>
+
+       </nav>
+
+        <h1>Welcome {{user}}</h1>
+    <h1>Todo List</h1>
+    <div>Add a new todo item: 
+        <form action="{{ url_for('add')}}" method="POST">
+            <input type="text" name="todoitem">
+            <input type="submit" value="Add Item">
+        </form>
+    </div>
+    <div>
+		<h2>Incomplete items</h2>
+		<ul>
+			{% for todo in incomplete %}
+			<li style="font-size: 30pt">{{ todo.text }}<a href="{{ url_for('complete', id=todo.id) }}
+			">Mark as Complete</a></li>
+			{% endfor %}
+        </ul>
+        <h2>Completed Items</h2>
+        <ul>
+        	{% for todo in complete %}
+        	<li>{{ todo.text }}</li>
+        	{% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

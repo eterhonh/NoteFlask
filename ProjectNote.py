@@ -11,12 +11,13 @@ from flask import url_for
 from flask import session
 from database import db
 
-from forms import RegisterForm
+from forms import RegisterForm, regextitleadd, regextitleedit
 from forms import LoginForm
 from forms import CommentForm
 from models import Note as Note
 from models import User as User
 from models import Comment as Comment
+from models import Todo as Todo
 
 
 app = Flask(__name__)     # create an app
@@ -68,48 +69,39 @@ def get_note(note_id):
 
 @app.route('/notes/new', methods=['GET', 'POST'])
 def new_note():
+    form = regextitleadd()
     if session.get('user'):
-        #check method used for request
-        if request.method == 'POST':
-            title = request.form['title']
-            text = request.form['noteText']
+        if form.validate_on_submit():
+            title = request.form['Titleadd']
+            text = request.form['Noteadd']
             from datetime import date
             today = date.today()
             today = today.strftime("%m-%d-%Y")
-            new_record = Note(title, text, today, session['user_id'])
-            db.session.add(new_record)
+            newEntry = Note(title, text, today, session['user_id'])
+            db.session.add(newEntry)
             db.session.commit()
-
             return redirect(url_for('get_notes'))
         else:
-            return render_template('new.html', user=session['user'])
+            return render_template('new.html', user=session['user'], form=form)
     else:
         return redirect(url_for('login'))
 
 @app.route('/notes/edit/<note_id>', methods=['GET', 'POST'])
 def update_note(note_id):
+    form = regextitleedit()
     if session.get('user'):
-        #check method used for request
-        if request.method == 'POST':
-            # get title data
-            title = request.form['title']
-            # get note data
-            text = request.form['noteText']
+        if form.validate_on_submit():
+            title = request.form['TitleEdit']
+            text = request.form['NoteEdit']
             note = db.session.query(Note).filter_by(id=note_id).one()
-            # update note data
             note.title = title
             note.text = text
-            # update note in DB
             db.session.add(note)
             db.session.commit()
-
             return redirect(url_for('get_notes'))
         else:
-            # GET request - show new note form edit note
-            # retrieve user from database
             my_note = db.session.query(Note).filter_by(id=note_id).one()
-
-            return render_template('new.html', note=my_note, user=session['user'])
+            return render_template('new.html', note=my_note, user=session['user'], form=form)
     else:
         return redirect(url_for('login'))
 
@@ -195,6 +187,41 @@ def new_comment(note_id):
 
     else:
         return redirect(url_for('login'))
+
+@app.route('/todo')
+def get_todo():
+    if session.get('user'):
+        incomplete = db.session.query(Todo).filter_by(user_id=session['user_id'], complete=False).all()
+        complete = db.session.query(Todo).filter_by(user_id=session['user_id'], complete=True).all()
+
+        return render_template('todo.html', user=session['user'], incomplete=incomplete, complete=complete)
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/add', methods=['POST'])
+def add():
+    if session.get('user'):
+        todo = Todo(text=request.form['todoitem'], complete=False, user_id=session['user_id'])
+        db.session.add(todo)
+        db.session.commit()
+
+        return redirect(url_for('get_todo'))
+
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/complete/<id>')
+def complete(id):
+    if session.get('user'):
+        todo = db.session.query(Todo).filter_by(id=int(id), user_id=session['user_id']).first()
+        todo.complete = True
+        db.session.commit()
+
+        return redirect(url_for('get_todo'))
+
+    else:
+        return redirect(url_for('login'))
+
 
 app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
 
