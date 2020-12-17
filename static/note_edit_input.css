@@ -4,7 +4,6 @@ body{
 div.header{
 	background-color: black;
 	padding: 25px 25px 25px 25px;
-	font-family: arial;
 	color: white;
 	position: fixed;
     top: 0;
@@ -13,11 +12,9 @@ div.header{
 }	
 div.header p {
 	display: inline;
-	font-family: arial;
 	color: white;
 }
 div.header a {
-	font-family: arial;
 	color: white;
 }
 p.d {
@@ -41,6 +38,11 @@ p.a{
 	left: 20px;
 	top: 4px;
 }
+
+.container-input{
+	text-align: center;
+}
+
 /*p.c {
 	position: absolute;
 	right: 20px;
@@ -61,16 +63,14 @@ div.mainheader{
 	margin-top: 90px;
 	color: blue;
 	font-size: 40px;
-	font-family: "Times New Roman", Times, serif;
 	font-weight: bold;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 	margin-left: 15px;
 }
 p.info{
-	margin-left: 15px;
-	font-family: "Times New Roman", Times, serif;
-	font-weight: bold;
+	font-weight: 900;
 	font-size: 20px;
+	font-family: 'Encode Sans Semi Expanded', sans-serif;
 }
 
 input.inputhere{
@@ -79,10 +79,10 @@ input.inputhere{
     padding: 7px;
 }
 input.submitbutton{
-	float: left;
-	background-color: blue;
-    border: none;
-    color: white;
+	float: right;
+	background-color: #01caff;
+	border: 1px solid black;
+    color: black;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -90,15 +90,21 @@ input.submitbutton{
     font-size: 16px;
 	margin-top: 30px;
 	margin-left: 15px;
+	border-radius: 8px;
 }
+
+.submit-button{
+	padding-right: 400px;
+}
+
 textarea.textin{
 	margin-left: 15px;
 	width: 35%;
+	padding: 7px;
 }
 p.errors{
 	color: #A4270C;
 	margin-left: 35px;
-    font-family: Arial;
     font-size: 15px;
     font-weight: bold;
 }

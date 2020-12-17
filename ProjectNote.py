@@ -62,8 +62,11 @@ def get_note(note_id):
         my_note = db.session.query(Note).filter_by(id=note_id, user_id=session['user_id']).one()
 
         form = CommentForm()
+        data = my_note.text
+        word_list = data.split()
+        list_length = len(word_list)
 
-        return render_template("note.html", note=my_note, user=session['user'], form=form)
+        return render_template("note.html", note=my_note, user=session['user'], form=form, note_count = list_length)
     else:
         return redirect(url_for('login'))
 
@@ -185,6 +188,20 @@ def new_comment(note_id):
 
         return redirect(url_for('get_note', note_id=note_id))
 
+    else:
+        return redirect(url_for('login'))
+
+#@app.route('/notes/<note_id>/delete/comment', methods=['POST'])
+#def delete_comment(note_id):
+    #if session.get('user'):
+
+
+@app.route('/notes/detail_view')
+def notes_detail_view():
+    if session.get('user'):
+        my_notes = db.session.query(Note).filter_by(user_id=session['user_id']).all()
+
+        return render_template('detailview.html', notes=my_notes, user=session['user'])
     else:
         return redirect(url_for('login'))
 

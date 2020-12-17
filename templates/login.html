@@ -5,29 +5,31 @@
     <title>Title</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@300&display=swap:400" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
     <body>
-        <div class="navdiv">
-            <nav>
-                <a href="{{ url_for('index') }}"> Home</a> ||
-                <a href="{{ url_for('get_notes') }}"> My Notes</a> ||
-                <a href="{{ url_for('new_note') }}">Add Note</a> ||               
+    <header>
+        <div class="container">
+            <img src="../static/logo.png" alt="note Logo" id="logo">
+            <nav class="site-nav">
+                <ul>
+                    <li><a href = "/index"> Home</a></li>
+                    <li><a href = "/notes"> My Notes</a></li>
+                    <li><a href = "/notes/new"> Add Note</a></li>
+                    <li><a href="/todo">ToDo Tasks</a></li>
+                    {% if user %}
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('login') }}">Sign In</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                </ul>
+                {% endif %}
             </nav>
-        {% if user %}
-			<nav>
-				<a href="{{ url_for('logout') }}">Logout</a>
-			</nav>
-		{% else %}
-			<nav>
-				<a href="{{ url_for('login') }}">Sign In</a> ||
-				<a href="{{ url_for('register') }}">Register</a>
-			</nav>
-		{% endif %}
         </div>
-
-        <h1>Welcome {% if user %}{{user}}{% endif %}to the 49er Notes App!</h1>
-
-        <h2>Use this site to maintain and organize your notes.</h2>
+    </header>
+<div class="login">
         <div class="formwrapper">
             <h2 class="title">Login</h2>
             <form method="POST" action="/login">
@@ -52,5 +54,6 @@
                 {{ form.submit }}
             </form>
         </div>
+    </div>
     </body>
 </html>
