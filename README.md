@@ -55,16 +55,22 @@ Happy Noting and creating To Do Tasks :)
 
 Below is an image of our Home page (eve is the name we will use for the following demo)
 
+
 <img width="1279" alt="Screen Shot 2020-12-17 at 7 56 43 AM" src="https://user-images.githubusercontent.com/71344424/102491611-79c47400-403e-11eb-84d5-f78589607134.png">
+
 
 Below is an image of our Notes page (grocery is the only note we currently have for the following demo)
 <img width="1279" alt="Screen Shot 2020-12-17 at 7 56 57 AM" src="https://user-images.githubusercontent.com/71344424/102491773-b2fce400-403e-11eb-8c4d-f12fe0360e4b.png">
 
+
 Below is an image of our Note detail of 'Grocery.' In this image you can see the Word Count Feature that was implemented by Rhytham.
+
 
 <img width="1279" alt="Screen Shot 2020-12-17 at 7 57 25 AM" src="https://user-images.githubusercontent.com/71344424/102491935-ec355400-403e-11eb-8c1c-3074cdaace60.png">
 
+
 Below is an image of our Detail View Feature that Jerimiah implemented when the button to see Detail View is clicked.
+
 
 <img width="704" alt="Screen Shot 2020-12-17 at 8 14 53 AM" src="https://user-images.githubusercontent.com/71344424/102492648-fe63c200-403f-11eb-84bd-7ca10f4873b2.png">
 
@@ -72,7 +78,9 @@ Below is an image of the ToDo Task Feature that Evette implmeneted. In red, 'Ste
 
 <img width="1280" alt="Screen Shot 2020-12-17 at 8 00 10 AM" src="https://user-images.githubusercontent.com/71344424/102493088-a4173100-4040-11eb-83bc-7697e4326f65.png">
 
+
 Below is an image of the RegEx Feature Aryani implemented. When a user puts down a special character (in this case a '@' on title) and if user puts mores than 1000 it will not be accepeted.
+
 
 <img width="1280" alt="Screen Shot 2020-12-17 at 8 00 56 AM" src="https://user-images.githubusercontent.com/71344424/102493386-1851d480-4041-11eb-8d7b-9d070cea44bd.png">
 
